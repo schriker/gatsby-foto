@@ -1,0 +1,17 @@
+.social {
+  padding-bottom: 70px;
+  display: flex;
+  justify-content: center;
+}
+
+.social a {
+  color: black;
+  font-size: 22px;
+  padding: 4px 6px 3px 6px;
+  transition: all ease 0.1s;
+}
+
+.social a:hover {
+  background-color: black;
+  color: #fff;
+}
