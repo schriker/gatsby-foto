@@ -1,0 +1,8 @@
+.galleryItem {
+  cursor: pointer;
+  transition: all ease 0.2s;
+}
+
+.galleryItem:hover {
+  opacity: 0.75;
+}

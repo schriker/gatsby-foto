@@ -2,10 +2,9 @@ import React, { useState, useRef } from "react"
 import { useSpring, animated } from "react-spring"
 import { useStaticQuery, graphql } from "gatsby"
 import styles from "./Menu.module.css"
-
-type CategoryType = {
-  name: string
-}
+import { CategoryType } from "../../types/photo"
+import { useDispatch } from "react-redux"
+import { selectCategory } from "../../store/slices/gallerySlice"
 
 type MenuQueryType = {
   strapi: {
@@ -25,7 +24,8 @@ const Menu = () => {
       }
     }
   `)
-  const liRef = useRef<HTMLLIElement | null>()
+  const dispatch = useDispatch()
+  const liRef = useRef<HTMLLIElement>(null!)
   const [clickedIndex, setClickedIndex] = useState(0)
   const [hoverIndex, setHoverIndex] = useState(0)
   const [props, set] = useSpring(() => ({
@@ -41,18 +41,24 @@ const Menu = () => {
     set({
       transform: `translateY(${index * liRef.current.clientHeight}px)`,
       color: "#fff",
-
     })
   }
 
-  const onClickHandler = (index: number) => {
+  const onClickHandler = (index: number, name: string) => {
     setClickedIndex(index)
-    set({ transform: `translateY(${index * liRef.current.clientHeight}px)`, color: "#fff" })
+    set({
+      transform: `translateY(${index * liRef.current.clientHeight}px)`,
+      color: "#fff",
+    })
+    dispatch(selectCategory({ category: name === "Wszystkie" ? null : name }))
   }
 
   const onMouseOutHandler = () => {
     setHoverIndex(clickedIndex)
-    set({ transform: `translateY(${clickedIndex * liRef.current.clientHeight}px)`, color: "#fff" })
+    set({
+      transform: `translateY(${clickedIndex * liRef.current.clientHeight}px)`,
+      color: "#fff",
+    })
   }
 
   return (
@@ -67,7 +73,7 @@ const Menu = () => {
           <li
             ref={liRef}
             className={index === hoverIndex ? styles.white : ""}
-            onClick={() => onClickHandler(index)}
+            onClick={() => onClickHandler(index, category.name)}
             onMouseOut={onMouseOutHandler}
             onMouseOver={() => onMouseOverHandler(index)}
             key={index}

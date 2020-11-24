@@ -1,12 +1,12 @@
 .menu {
   flex: 1 0 auto;
-  /* padding: 0 30px; */
 }
 
 .menu h2 {
   font-weight: 600;
   font-size: 32px;
   padding: 0 30px;
+  margin: 10px 0;
 }
 
 .menu ul {

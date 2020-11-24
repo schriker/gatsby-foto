@@ -1,11 +1,16 @@
 .wrapper {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 300px;
+  position: fixed;
   display: flex;
   flex-direction: column;
   border-right: 1px solid #d1d1d1;
 }
 
 .logo {
-  padding: 60px 0 20px 0;
+  padding: 60px 0 40px 0;
   justify-content: center;
   display: flex;
 }
