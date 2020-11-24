@@ -4,9 +4,9 @@ import Masonry from "react-masonry-css"
 import styles from "./Gallery.module.css"
 import GalleryItem from "./GalleryItem"
 import { useDispatch } from "react-redux"
-import { openGallery } from "../../store/slices/gallerySlice"
-import GalleryLightbox from "./GalleryLightbox";
-import { useTypedSelector } from "../../store/rootReducer";
+import { openGallery, setPhoto } from "../../store/slices/gallerySlice"
+import GalleryLightbox from "./GalleryLightbox"
+import { useTypedSelector } from "../../store/rootReducer"
 
 type GalleryPropsTye = {
   photos: PhotoType[]
@@ -31,9 +31,19 @@ const Gallery: React.FC<GalleryPropsTye> = ({ photos }) => {
     )
   }
 
+  const onPrev = () => {
+    const index = (photos.length + gallery.index - 1) % photos.length
+    dispatch(setPhoto({ photo: photos[index], index }))
+  }
+
+  const onNext = () => {
+    const index = (gallery.index + 1) % photos.length
+    dispatch(setPhoto({ photo: photos[index], index }))
+  }
+
   return (
     <div className={styles.gallery}>
-      <GalleryLightbox />
+      <GalleryLightbox next={onNext} prev={onPrev} />
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="my-masonry-grid"

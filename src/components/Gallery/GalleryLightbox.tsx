@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./GalleryLightbox.module.css"
 import { useTypedSelector } from "../../store/rootReducer"
 import { animated, useTransition } from "react-spring"
@@ -11,10 +11,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import { useDispatch } from "react-redux"
 import { closeGallery } from "../../store/slices/gallerySlice"
-import Img from "gatsby-image"
 
-const GalleryLightbox = () => {
+type GalleryLightboxPropsType = {
+  next: () => void
+  prev: () => void
+}
+
+const GalleryLightbox: React.FC<GalleryLightboxPropsType> = ({
+  next,
+  prev,
+}) => {
   const dispatch = useDispatch()
+  const [pressedKey, setKey] = useState<KeyboardEvent | null>(null)
   const gallery = useTypedSelector(state => state.gallery)
   const exif = gallery.photo?.file.imageFile.fields.exif
   useBodyClass("hide-overflow", gallery.isOpen)
@@ -26,6 +34,34 @@ const GalleryLightbox = () => {
       duration: 200,
     },
   })
+
+  useEffect(() => {
+    const onKeyDownHandler = (event: KeyboardEvent) => {
+      if (!pressedKey) {
+        setKey(event)
+      }
+    }
+    const onKeyUpHandler = () => {
+      console.log(pressedKey)
+      if (pressedKey?.code === "ArrowRight" || pressedKey?.code === "Space") {
+        next()
+      }
+      if (pressedKey?.code === "ArrowLeft") {
+        prev()
+      }
+      if (pressedKey?.code === "Escape") {
+        dispatch(closeGallery())
+      }
+      setKey(null)
+    }
+    window.addEventListener("keydown", onKeyDownHandler)
+    window.addEventListener("keyup", onKeyUpHandler)
+    return () => {
+      window.removeEventListener("keydown", onKeyDownHandler)
+      window.removeEventListener("keyup", onKeyUpHandler)
+    }
+  }, [pressedKey])
+
   return (
     <>
       {transitions.map(
@@ -49,7 +85,7 @@ const GalleryLightbox = () => {
                 </button>
               </div>
               <div className={styles.content}>
-                <button>
+                <button onClick={prev}>
                   <FontAwesomeIcon icon={faChevronLeft} />
                 </button>
                 <div className={styles.photo}>
@@ -62,7 +98,7 @@ const GalleryLightbox = () => {
                     />
                   )}
                 </div>
-                <button>
+                <button onClick={next}>
                   <FontAwesomeIcon icon={faChevronRight} />
                 </button>
               </div>

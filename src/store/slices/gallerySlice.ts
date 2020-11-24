@@ -33,6 +33,13 @@ const gallerySlide = createSlice({
       state.isOpen = false
       state.photo = null
     },
+    setPhoto(
+      state,
+      { payload }: PayloadAction<{ photo: PhotoType; index: number }>
+    ) {
+      state.photo = payload.photo
+      state.index = payload.index
+    },
     openGallery(
       state,
       { payload }: PayloadAction<{ photo: PhotoType; index: number }>
@@ -48,6 +55,7 @@ export const {
   closeGallery,
   openGallery,
   selectCategory,
+  setPhoto,
 } = gallerySlide.actions
 
 export default gallerySlide.reducer
