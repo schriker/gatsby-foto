@@ -2,7 +2,7 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 300px;
+  width: 270px;
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -13,4 +13,10 @@
   padding: 60px 0 40px 0;
   justify-content: center;
   display: flex;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    display: none;
+  }
 }

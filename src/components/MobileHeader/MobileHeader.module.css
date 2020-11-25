@@ -1,0 +1,28 @@
+.wrapper {
+  display: none;
+  height: 60px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px 0 20px;
+  box-sizing: border-box;
+}
+
+.social {
+  color: black;
+  font-size: 22px;
+  padding: 4px 6px 3px 6px;
+  transition: all ease 0.1s;
+  background: none;
+  border: 0;
+}
+
+.social:hover {
+  background-color: black;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    display: flex;
+  }
+}

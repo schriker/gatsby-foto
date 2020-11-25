@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { useSpring, animated } from "react-spring"
 import { useStaticQuery, graphql } from "gatsby"
 import styles from "./Menu.module.css"
@@ -35,6 +35,10 @@ const Menu = () => {
       duration: 200,
     },
   }))
+
+  useEffect(() => {
+    dispatch(selectCategory({ category: null }))
+  }, [])
 
   const onMouseOverHandler = (index: number) => {
     setHoverIndex(index)

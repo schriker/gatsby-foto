@@ -17,9 +17,8 @@ const Gallery: React.FC<GalleryPropsTye> = ({ photos }) => {
   const dispatch = useDispatch()
   const breakpointColumnsObj = {
     default: 3,
-    1100: 3,
-    700: 2,
-    500: 1,
+    1200: 2,
+    700: 1,
   }
 
   const onClickHandler = (photo: PhotoType, index: number) => {

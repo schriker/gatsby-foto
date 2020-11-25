@@ -7,6 +7,7 @@ type GalleryStateType = {
   isOpen: boolean
   photo: PhotoType | null
   index: number
+  mobileMenuOpen: boolean
 }
 
 const galleryInitialState: GalleryStateType = {
@@ -14,6 +15,7 @@ const galleryInitialState: GalleryStateType = {
   isOpen: false,
   photo: null,
   index: 0,
+  mobileMenuOpen: false,
 }
 
 const gallerySlide = createSlice({
@@ -48,6 +50,9 @@ const gallerySlide = createSlice({
       state.photo = payload.photo
       state.index = payload.index
     },
+    toggleMobileMenu(state) {
+      state.mobileMenuOpen = !state.mobileMenuOpen
+    },
   },
 })
 
@@ -56,6 +61,7 @@ export const {
   openGallery,
   selectCategory,
   setPhoto,
+  toggleMobileMenu,
 } = gallerySlide.actions
 
 export default gallerySlide.reducer

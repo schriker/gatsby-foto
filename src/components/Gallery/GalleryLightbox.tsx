@@ -42,7 +42,6 @@ const GalleryLightbox: React.FC<GalleryLightboxPropsType> = ({
       }
     }
     const onKeyUpHandler = () => {
-      console.log(pressedKey)
       if (pressedKey?.code === "ArrowRight" || pressedKey?.code === "Space") {
         next()
       }
@@ -75,7 +74,7 @@ const GalleryLightbox: React.FC<GalleryLightboxPropsType> = ({
                   <span>f/{exif?.fstop}</span>
                   <span>{exif?.exposure}</span>
                   <span>ISO {exif?.iso}</span>
-                  <span>obiektyw - {exif?.lens}</span>
+                  <span>- {exif?.lens}</span>
                 </div>
                 <button
                   onClick={() => dispatch(closeGallery())}
