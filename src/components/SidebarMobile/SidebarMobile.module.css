@@ -11,6 +11,7 @@
 }
 
 .backDrop {
+  cursor: pointer;
   display: none;
   width: 100%;
   height: 100%;
@@ -27,6 +28,7 @@
 }
 
 .closeButton {
+  cursor: pointer;
   display: none;
   position: absolute;
   right: 15px;
@@ -49,7 +51,7 @@
     display: block;
   }
   .wrapper {
-    overflow: scroll;
+    overflow: auto;
     position: fixed;
     z-index: 999;
     background-color: #fff;

@@ -48,6 +48,10 @@ function SEO({ description, lang, meta }) {
           content: metaDescription,
         },
         {
+          property: `og:image`,
+          content: `https://www.janusmarcin.pl/foto.jpg`,
+        },
+        {
           property: `og:type`,
           content: `website`,
         },
